@@ -1,0 +1,122 @@
+apply plugin: 'groovy'
+
+sourceSets {
+    jobs {
+        groovy {
+            srcDirs 'jobs'
+        }
+    }
+}
+
+configurations {
+    jenkins
+    compile.extendsFrom(jenkins)
+    lib
+    compile.extendsFrom(lib)
+    jenkinsPlugins
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'xml-apis:xml-apis:1.4.01'
+    }
+}
+
+apply from: 'plugins.gradle'
+
+repositories {
+    mavenLocal()
+    flatDir {
+        dirs "$projectDir/missing-libs"
+    }
+    maven { url 'http://repo.jenkins-ci.org/releases/' }
+    maven { url 'https://repo.jenkins-ci.org/public/' }
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+
+    lib 'io.fourfinanceit.pipeline:jenkins-pipeline-core:0.5.0'
+    lib 'io.fourfinanceit.pipeline:jenkins-job-components:0.5.0'
+
+    jenkins "org.jenkins-ci.main:jenkins-core:${project.ext.jenkinsVersion}"
+
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
+    compile 'com.google.guava:guava:14.0'
+    lib "org.jenkins-ci.plugins:job-dsl:${project.ext.jobDslVersion}@jar"
+    lib "org.jenkins-ci.plugins:job-dsl-core:${project.ext.jobDslVersion}"
+
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+        exclude module: 'groovy-all'
+    }
+
+    testCompile ('org.jenkins-ci.main:jenkins-test-harness:2.31') {
+        exclude group: 'org.netbeans.modules', module: 'org-netbeans-insane' //org-netbeans-insane is excluded, because it's not resolvable from the remote repository
+    }
+    /*
+    * org-netbeans-insane here is added (look 2 lines above) to the classpath from local sources
+    * that are taken from the repository, where they were released as a source jar (not jar)
+    * */
+    testCompile ':org-netbeans-insane:RELEASE72'
+
+    testCompile 'io.fourfinanceit.pipeline:jenkins-pipeline-test-utils:0.5.0'
+    testCompile 'xmlunit:xmlunit:1.6'
+
+    testCompile "org.jenkins-ci.main:jenkins-war:${project.ext.jenkinsVersion}"
+    testCompile "org.jenkins-ci.main:jenkins-war:${project.ext.jenkinsVersion}:war-for-test@jar"
+    testCompile 'org.jenkins-ci.plugins:structs:1.2@jar'
+    testCompile configurations.jenkinsPlugins
+
+    jobsCompile sourceSets.main.output
+    jobsCompile configurations.compile
+    jobsRuntime configurations.runtime
+}
+
+task resolveTestPlugins(type: Copy) {
+    from configurations.jenkinsPlugins
+    into new File(sourceSets.test.output.resourcesDir, 'test-dependencies')
+    include '*.hpi'
+    include '*.jpi'
+
+    doLast {
+        def baseNames = source.collect { it.name[0..it.name.lastIndexOf('.')-1] }
+        new File(destinationDir, 'index').setText(baseNames.join('\n'), 'UTF-8')
+    }
+}
+
+test {
+    dependsOn tasks.resolveTestPlugins
+    inputs.files sourceSets.jobs.groovy.srcDirs
+
+    // set build directory for Jenkins test harness, JENKINS-26331
+    systemProperty 'buildDirectory', project.buildDir.absolutePath
+    testLogging {
+        exceptionFormat = 'full'
+    }
+    jvmArgs(project.ext.properties.collect {k, v -> "-D$k=$v"})
+}
+
+task cleanLibs(type: Delete) {
+    delete 'lib'
+}
+
+tasks.clean.dependsOn 'cleanLibs'
+
+task libs(type: Copy) {
+    into 'lib'
+    from configurations.lib
+}
+
+apply plugin: 'idea'
+
+idea {
+    module {
+        excludeDirs += file('lib')
+
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
