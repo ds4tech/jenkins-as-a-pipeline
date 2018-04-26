@@ -6,6 +6,13 @@ sourceSets {
             srcDirs 'jobs'
         }
     }
+
+    examples {
+        groovy {
+            srcDirs 'examples'
+            compileClasspath = compileGroovy.classpath
+        }
+    }
 }
 
 configurations {

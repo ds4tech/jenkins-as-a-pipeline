@@ -1,3 +1,5 @@
+package assignments
+
 import javaposse.jobdsl.dsl.DslFactory
 
 DslFactory dsl = this as DslFactory

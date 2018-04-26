@@ -1,0 +1,7 @@
+package solutions
+
+job('hello-sollers') {
+    steps {
+        shell 'echo Hello Sollers!'
+    }
+}

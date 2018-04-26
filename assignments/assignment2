@@ -1,0 +1,3 @@
+Allow to retrigger job from previous assignment with previous parameters without having to specify them
+
+TIP: Use Rebuild plugin
