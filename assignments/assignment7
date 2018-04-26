@@ -1,0 +1,3 @@
+Clean up the previously created pipeline code, by employing the DRY principle (Don't Repeat Yourself)
+
+TIP: look for repeating patterns in the jobs and extract them to a separate methods, closures, classes etc.

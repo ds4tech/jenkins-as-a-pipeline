@@ -1,4 +1,4 @@
-package solutions
+package examples
 
 job('env-dependant-scheduling') {
     triggers {

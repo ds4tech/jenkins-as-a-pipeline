@@ -1,4 +1,4 @@
-package solutions
+package examples
 
 job('01-build') {
     scm {

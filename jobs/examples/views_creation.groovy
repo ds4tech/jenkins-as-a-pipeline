@@ -1,4 +1,4 @@
-package solutions
+package examples
 
 import javaposse.jobdsl.dsl.views.jobfilter.Status
 

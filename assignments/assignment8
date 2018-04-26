@@ -1,0 +1,3 @@
+In the previously created pipeline, make the last step (production deployment) to be triggered manually
+
+TIP: try to use buildPipelineTrigger publisher

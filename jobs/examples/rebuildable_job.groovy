@@ -1,4 +1,4 @@
-package solutions
+package examples
 
 job('parametrized-hello') {
     properties {

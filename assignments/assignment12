@@ -1,0 +1,9 @@
+In the previously developed pipeline, change the step waiting for long running steps in such a way that does not occupy jenkins executors.
+Keep the previous behaviour of not letting the pipeline to move forward, before the long running step won't be finished.
+Modify the logic to fail the step when the long running step has failed as well.
+Start from enabling the waiting step to be rebuild manually, instead of automatically rebuilding it
+
+
+TIP: Check decumentation for groovy postbuild manager object (like manager.buildFailure())
+TIP: Check for allowRebuild() option in pipeline view to enable rebuilding
+TIP: use com.szymonhoma.util.Scripts to load script, for better development experience

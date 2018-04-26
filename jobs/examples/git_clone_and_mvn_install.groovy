@@ -1,4 +1,4 @@
-package solutions
+package examples
 
 job('service-discovery') {
     scm {

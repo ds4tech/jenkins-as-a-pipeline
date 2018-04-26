@@ -1,0 +1,6 @@
+In the previously developed pipeline, add one more step before the production deployment step, that will be actively waiting for the long running steps to finish.
+
+TIP: look for groovyPostBuild() in publishers
+TIP: check groovy post build documentation in the Jenkins (in the job configuration)
+TIP: check jenkins.model.Jenkins.instance.getItem(job_name) method to get information about Jenkins items
+TIP: for better development experience, use com.szymonhoma.util.Scripts to load groovy scripts.

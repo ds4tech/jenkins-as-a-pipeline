@@ -1,0 +1,4 @@
+In the previously developed pipeline, add long running step to be executed in parallel with the acceptance tests (after the deployment to test environment).
+Try adding more of such steps to see how they are drawn in the pipeline
+
+TIP: in order to simulate long running task, you can use shell command like "sleep 30", which makes the job to run for 30 seconds

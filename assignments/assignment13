@@ -1,0 +1,4 @@
+In the previously developed pipeline, change the waiting step to be rebuild automatically as long as as the long running step won't finish
+
+
+TIP: check documentation for naginatorPublisher plugin and auto-generated job-dsl part

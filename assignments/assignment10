@@ -1,0 +1,3 @@
+In the previously developed pipeline, allow the long running steps to be executed concurrently
+
+TIP: make the wait time long enough to enable concurrent execution of long running steps

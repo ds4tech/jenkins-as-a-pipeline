@@ -1,4 +1,4 @@
-package solutions
+package examples
 
 import groovy.json.JsonSlurper
 
