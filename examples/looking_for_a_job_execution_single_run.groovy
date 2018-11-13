@@ -1,8 +1,7 @@
 import Predicate
 import Job
-import Result
 import Run
-import Jenkins
+import jenkins.model.*
 
 PrintStream printStream = manager.listener.logger
 

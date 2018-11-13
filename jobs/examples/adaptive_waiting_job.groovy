@@ -1,7 +1,10 @@
 package examples
 
+import javaposse.jobdsl.dsl.DslFactory
 
-job('simple-waiting-job') {
+DslFactory dsl = this as DslFactory
+
+dsl.job('simple-waiting-job') {
     publishers {
         naginatorPublisher {
             maxSchedule 10
@@ -25,7 +28,7 @@ job('simple-waiting-job') {
 //                }
 //            }
 //            checkRegexp true
-//            regexpForRerun 'regexp to determine whether there is a point in reruning it'
+//            regexpForRerun 'regexp to determine whether there is a point in rerunning it'
 //
 //            rerunIfUnstable true
 //            rerunMatrixPart false

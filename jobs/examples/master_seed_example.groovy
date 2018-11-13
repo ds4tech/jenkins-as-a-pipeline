@@ -1,6 +1,10 @@
 package examples
 
-job('github-projects-seed') {
+import javaposse.jobdsl.dsl.DslFactory
+
+DslFactory factory = this as DslFactory
+
+factory.job('github-projects-seed') {
     steps {
         dsl '''
             import groovy.json.JsonSlurper
@@ -40,7 +44,7 @@ job('github-projects-seed') {
     }
 }
 
-job('bitbucket-projects-seed') {
+factory.job('bitbucket-projects-seed') {
     scm {
         git('https://github.com/dev-trainings/jenkins-jobdsl-scripts.git', 'master')
     }

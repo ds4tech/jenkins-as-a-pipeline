@@ -1,7 +1,7 @@
 import Predicate
 import Job
 import Run
-import Jenkins
+import jenkins.model.*
 
 PrintStream printStream = manager.listener.logger
 
@@ -14,6 +14,7 @@ printStream.println("current version: $currentVersion")
 Run searchedJobRun
 while (true) {
     Job searchedJob = Jenkins.instance.getItem('put-your-job-name-here') as Job
+
     searchedJobRun = searchedJob.getBuilds().filter({ Run run ->
         String version = run.getEnvironment(manager.listener).get(versionVariable)
         return currentVersion.equals(version)

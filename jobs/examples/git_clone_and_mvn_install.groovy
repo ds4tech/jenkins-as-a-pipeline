@@ -1,6 +1,10 @@
 package examples
 
-job('service-discovery') {
+import javaposse.jobdsl.dsl.DslFactory
+
+DslFactory dsl = this as DslFactory
+
+dsl.job('service-discovery') {
     scm {
         git('https://github.com/dev-trainings/jobdsl-service-discovery.git', 'master')
     }

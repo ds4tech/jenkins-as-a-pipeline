@@ -1,8 +1,11 @@
 package examples
 
+import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.views.jobfilter.Status
 
-listView('seed-jobs') {
+DslFactory dsl = this as DslFactory
+
+dsl.listView('seed-jobs') {
     jobs {
         regex '.*-seed$'
     }
@@ -15,7 +18,7 @@ listView('seed-jobs') {
     }
 }
 
-listView('disabled-jobs') {
+dsl.listView('disabled-jobs') {
     jobFilters {
         status {
             status Status.DISABLED

@@ -1,6 +1,10 @@
 package examples
 
-job('01-build') {
+import javaposse.jobdsl.dsl.DslFactory
+
+DslFactory dsl = this as DslFactory
+
+dsl.job('01-build') {
     scm {
         git 'https://github.com/dev-trainings/simple-gradle-project.git'
     }
@@ -22,7 +26,7 @@ job('01-build') {
     }
 }
 
-job('02-deploy-on-test') {
+dsl.job('02-deploy-on-test') {
     steps {
         shell 'echo deploying project v. $VERSION on test'
     }
@@ -38,7 +42,7 @@ job('02-deploy-on-test') {
     }
 }
 
-job('03-acceptance-tests') {
+dsl.job('03-acceptance-tests') {
     scm {
         git('https://github.com/dev-trainings/simple-gradle-project.git', '$version')
     }
@@ -54,13 +58,13 @@ job('03-acceptance-tests') {
     }
 }
 
-job('04-deploy-on-production') {
+dsl.job('04-deploy-on-production') {
     steps {
         shell 'echo deploying project v. $VERSION on production'
     }
 }
 
-deliveryPipelineView('pipeline-delivery-view') {
+dsl.deliveryPipelineView('pipeline-delivery-view') {
     allowPipelineStart()
     enableManualTriggers()
     pipelines {
