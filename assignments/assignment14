@@ -1,0 +1,13 @@
+Different levels of testing Job-DSL code
+
+1. Execute ./gradlew clean build in the root of this project and see whether some tests are failing if so, try to fix the tests.
+
+1.1 Check that you have solution for assignment13 available in the jobs/assignments and try to execute LightAllAssignmentsScriptsSyntacticCorrectnessSpecification
+from IDE (should be executed without gradle for the speed reasons). Compare it results' with AllAssignmentsScriptsSyntacticCorrectnessSpecification and try to
+tell why only one of them fails.
+
+2. Look at ExampleDSLScriptRegressionSpecification and src/resources/com.szymonhoma/example_for_regression_dsl_script.groovy, try to execute these test
+from the IDE (a gradle execution must be used), try to break the test by changing any part of the dsl script and see the output.
+
+3. Add a new test similar to the ExampleDSLScriptRegressionSpecification, that will use any other script and try to generate xmls for it, by using
+./gradlew clean build -PoutputMissingXml=true
