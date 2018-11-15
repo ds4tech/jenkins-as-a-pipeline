@@ -1,7 +1,7 @@
-import Predicate
-import Job
-import Run
-import jenkins.model.*
+import com.google.common.base.Predicate
+import hudson.model.Job
+import hudson.model.Run
+import jenkins.model.Jenkins
 
 PrintStream printStream = manager.listener.logger
 
