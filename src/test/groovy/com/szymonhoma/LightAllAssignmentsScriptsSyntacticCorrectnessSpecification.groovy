@@ -4,10 +4,12 @@ import com.ofg.pipeline.test.util.JobSpecTrait
 import groovy.io.FileType
 import javaposse.jobdsl.dsl.DslScriptLoader
 import javaposse.jobdsl.dsl.MemoryJobManagement
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
 //Can be executed directly from IDE
+@Ignore
 class LightAllAssignmentsScriptsSyntacticCorrectnessSpecification extends Specification implements JobSpecTrait {
 
     DslScriptLoader loader = new DslScriptLoader(new MemoryJobManagement())

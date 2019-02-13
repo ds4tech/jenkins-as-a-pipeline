@@ -11,7 +11,10 @@ String versionVariable = 'VERSION'
 String currentVersion = localEnv.get(versionVariable)
 printStream.println("current version: $currentVersion")
 
-Job searchedJob = Jenkins.instance.getItem('put-your-job-name-here') as Job
+def n = 0
+String jobName = "03-0$n-long-running-job"
+
+Job searchedJob = Jenkins.instance.getItem(jobName) as Job
 Run searchedJobRun = searchedJob.getBuilds().filter({ Run run ->
     String version = run.getEnvironment(manager.listener).get(versionVariable)
     return currentVersion.equals(version)

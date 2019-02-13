@@ -1,4 +1,4 @@
-package examples
+package assignments
 
 import com.ofg.pipeline.core.JenkinsVariables
 import com.ofg.pipeline.core.PipelineTemplateBuilder
