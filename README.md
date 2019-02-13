@@ -35,4 +35,5 @@
  
 ### Jenkins-Docker
 [Jenkins Docker main repository](https://github.com/jenkinsci/docker)
-[Jenkins Docker example](https://github.com/tomaszkiewicz/docker-jenkins)
+
+[Jenkins Docker example](https://github.com/s2lomon/docker-jenkins)
