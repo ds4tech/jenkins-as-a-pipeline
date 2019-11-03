@@ -48,7 +48,7 @@ private File prepareJenkinsHome() {
 }
 
 private File getJenkinsHome() {
-    def jenkinsHome = new File(System.getProperty('user.home'), "${project.name}_jenkins_home")
+    def jenkinsHome = new File(System.getProperty('user.home'), ".jenkins")
     if (project.hasProperty('localJenkinsHome')) {
         jenkinsHome = new File(project.ext.localJenkinsHome)
     }
@@ -102,4 +102,3 @@ private void createScript(String filename, String scriptText) {
                                                             PosixFilePermission.OWNER_EXECUTE,] as Set)
     }
 }
-
